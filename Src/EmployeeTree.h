@@ -17,6 +17,10 @@ public:
     void inorder(Employee* root);
     void preorder(Employee* root);
     void postorder(Employee* root);
+
+    int height(Employee* root);
+    int countManagers(Employee* root);
+    int countEmployees(Employee* root);
 };
 
 #endif

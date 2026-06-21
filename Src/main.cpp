@@ -27,8 +27,23 @@ int main() {
 
     std::cout << "\nPostorder: ";
     tree.postorder(J);
-
     std::cout << std::endl;
+    
+    std::cout << "\nOrganization Statistics\n";
+
+    std::cout << "CEO: " << J->id << '\n';
+
+    std::cout << "Employees: "
+          << tree.countEmployees(J)
+          << '\n';
+
+    std::cout << "Managers: "
+          << tree.countManagers(J)
+          << '\n';
+
+    std::cout << "Height: "
+          << tree.height(J)
+          << '\n';
 
     return 0;
 }

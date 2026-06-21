@@ -1,3 +1,4 @@
+#include <algorithm>
 #include "EmployeeTree.h"
 
 void EmployeeTree::inorder(Employee* root) {
@@ -25,4 +26,40 @@ void EmployeeTree::postorder(Employee* root) {
     postorder(root->left);
     postorder(root->right);
     std::cout << root->id << " ";
+}
+
+int EmployeeTree::height(Employee* root) {
+
+    if (root == nullptr)
+        return 0;
+
+    int leftHeight = height(root->left);
+    int rightHeight = height(root->right);
+
+    return 1 + std::max(leftHeight, rightHeight);
+}
+
+int EmployeeTree::countEmployees(Employee* root) {
+
+    if (root == nullptr)
+        return 0;
+
+    return 1 +
+           countEmployees(root->left) +
+           countEmployees(root->right);
+}
+
+int EmployeeTree::countManagers(Employee* root) {
+
+    if (root == nullptr)
+        return 0;
+
+    int current = 0;
+
+    if (root->left != nullptr || root->right != nullptr)
+        current = 1;
+
+    return current +
+           countManagers(root->left) +
+           countManagers(root->right);
 }
