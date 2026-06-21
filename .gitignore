@@ -1,0 +1,16 @@
+# Compiled files
+*.exe
+*.out
+*.o
+*.obj
+
+# VS Code
+.vscode/
+
+# CLion
+.idea/
+cmake-build-*/
+
+# OS files
+.DS_Store
+Thumbs.db
