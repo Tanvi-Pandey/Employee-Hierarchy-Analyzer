@@ -2,6 +2,8 @@
 #define EMPLOYEE_TREE_H
 
 #include <iostream>
+#include <vector>
+#include <string>
 
 struct Employee {
     char id;
@@ -10,6 +12,12 @@ struct Employee {
 
     Employee(char value)
         : id(value), left(nullptr), right(nullptr) {}
+};
+
+struct Record {
+    char manager;
+    char leftEmployee;
+    char rightEmployee;
 };
 
 class EmployeeTree {
@@ -21,6 +29,8 @@ public:
     int height(Employee* root);
     int countManagers(Employee* root);
     int countEmployees(Employee* root);
+
+    std::vector<Record> readRecords(const std::string& filename);
 };
 
 #endif

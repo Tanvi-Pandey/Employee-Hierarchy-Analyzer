@@ -1,49 +1,24 @@
 #include "EmployeeTree.h"
 
+#include <iostream>
+#include <vector>
+
 int main() {
-
-    Employee* J = new Employee('J');
-    Employee* F = new Employee('F');
-    Employee* N = new Employee('N');
-    Employee* L = new Employee('L');
-    Employee* P = new Employee('P');
-    Employee* T = new Employee('T');
-
-    J->left = F;
-    J->right = N;
-
-    N->left = L;
-    N->right = P;
-
-    P->right = T;
 
     EmployeeTree tree;
 
-    std::cout << "Inorder: ";
-    tree.inorder(J);
+    std::vector<Record> records =
+        tree.readRecords("input/SampleInput.txt");
 
-    std::cout << "\nPreorder: ";
-    tree.preorder(J);
+    std::cout << "Employee Records\n";
 
-    std::cout << "\nPostorder: ";
-    tree.postorder(J);
-    std::cout << std::endl;
-    
-    std::cout << "\nOrganization Statistics\n";
-
-    std::cout << "CEO: " << J->id << '\n';
-
-    std::cout << "Employees: "
-          << tree.countEmployees(J)
-          << '\n';
-
-    std::cout << "Managers: "
-          << tree.countManagers(J)
-          << '\n';
-
-    std::cout << "Height: "
-          << tree.height(J)
-          << '\n';
+    for (const auto& record : records) {
+        std::cout
+            << record.manager << " "
+            << record.leftEmployee << " "
+            << record.rightEmployee
+            << '\n';
+    }
 
     return 0;
 }

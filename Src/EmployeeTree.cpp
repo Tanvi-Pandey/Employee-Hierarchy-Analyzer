@@ -1,5 +1,9 @@
-#include <algorithm>
 #include "EmployeeTree.h"
+
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <algorithm>
 
 void EmployeeTree::inorder(Employee* root) {
     if (root == nullptr)
@@ -29,7 +33,6 @@ void EmployeeTree::postorder(Employee* root) {
 }
 
 int EmployeeTree::height(Employee* root) {
-
     if (root == nullptr)
         return 0;
 
@@ -40,7 +43,6 @@ int EmployeeTree::height(Employee* root) {
 }
 
 int EmployeeTree::countEmployees(Employee* root) {
-
     if (root == nullptr)
         return 0;
 
@@ -50,7 +52,6 @@ int EmployeeTree::countEmployees(Employee* root) {
 }
 
 int EmployeeTree::countManagers(Employee* root) {
-
     if (root == nullptr)
         return 0;
 
@@ -62,4 +63,32 @@ int EmployeeTree::countManagers(Employee* root) {
     return current +
            countManagers(root->left) +
            countManagers(root->right);
+}
+
+std::vector<Record> EmployeeTree::readRecords(const std::string& filename) {
+
+    std::ifstream file(filename);
+
+    std::vector<Record> records;
+
+    if (!file.is_open()) {
+        std::cerr << "Could not open file\n";
+        return records;
+    }
+
+    char search1, search2;
+    file >> search1 >> search2;
+
+    Record temp;
+
+    while (file >> temp.manager
+                >> temp.leftEmployee
+                >> temp.rightEmployee) {
+
+        records.push_back(temp);
+    }
+
+    file.close();
+
+    return records;
 }
