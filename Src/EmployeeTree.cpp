@@ -219,7 +219,7 @@ char EmployeeTree::getTeammate(
         parent->left)
         return parent->left->id;
 
-    return 'X';
+    return 'X';}
 
     bool EmployeeTree::isBSTUtil(Employee* root,
                              char minValue,
@@ -232,24 +232,17 @@ char EmployeeTree::getTeammate(
         root->id >= maxValue)
         return false;
 
-    return isBSTUtil(
-               root->left,
-               minValue,
-               root->id
-           ) &&
-           isBSTUtil(
-               root->right,
-               root->id,
-               maxValue
-           );
+    return isBSTUtil(root->left,
+                     minValue,
+                     root->id) &&
+           isBSTUtil(root->right,
+                     root->id,
+                     maxValue);
 }
 
-    bool EmployeeTree::isBST(Employee* root) {
+bool EmployeeTree::isBST(Employee* root) {
 
-    return isBSTUtil(
-        root,
-        '\0',
-        '~'
-    );
+    return isBSTUtil(root,
+                     '\0',
+                     '~');
 }
-    }
