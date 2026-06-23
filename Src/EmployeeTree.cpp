@@ -220,4 +220,36 @@ char EmployeeTree::getTeammate(
         return parent->left->id;
 
     return 'X';
+
+    bool EmployeeTree::isBSTUtil(Employee* root,
+                             char minValue,
+                             char maxValue) {
+
+    if (root == nullptr)
+        return true;
+
+    if (root->id <= minValue ||
+        root->id >= maxValue)
+        return false;
+
+    return isBSTUtil(
+               root->left,
+               minValue,
+               root->id
+           ) &&
+           isBSTUtil(
+               root->right,
+               root->id,
+               maxValue
+           );
 }
+
+    bool EmployeeTree::isBST(Employee* root) {
+
+    return isBSTUtil(
+        root,
+        '\0',
+        '~'
+    );
+}
+    }

@@ -42,6 +42,13 @@ int main() {
 
     std::cout << '\n';
 
+    std::cout << "\nBST Valid: ";
+
+    if (tree.isBST(ceo))
+        std::cout << "Yes\n";
+    else
+        std::cout << "No\n";
+
     char target;
 
     std::cout << "\nEnter employee to search: ";

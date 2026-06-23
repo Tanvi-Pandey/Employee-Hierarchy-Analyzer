@@ -39,6 +39,12 @@ public:
     Employee* findParent(Employee* root, char employeeId);
 
     char getTeammate(Employee* root, char employeeId);
+
+    bool isBST(Employee* root);
+
+    bool isBSTUtil(Employee* root,
+                char minValue,
+                char maxValue);
 };
 
 #endif
