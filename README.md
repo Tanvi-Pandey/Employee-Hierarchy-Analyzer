@@ -1,2 +1,16 @@
-# Employee-Hierarchy-Analyzer
-A C++  project that models an organization hierarchy using binary trees and supports traversal, search, and BST validation.
+# Features
+- Dynamic hierarchy construction
+- CEO detection
+- Employee search
+- Teammate lookup
+- BST validation
+- Hierarchy restructuring
+- Organization statistics
+
+# Concepts Used
+- Binary Trees
+- Recursion
+- File Handling
+- Hash Maps
+- Tree Traversals
+- BST Validation

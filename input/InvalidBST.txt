@@ -1,0 +1,7 @@
+P T
+J N F
+N L P
+F X X
+L X X
+P X T
+T X X
