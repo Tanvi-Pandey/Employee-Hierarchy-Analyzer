@@ -25,6 +25,7 @@ public:
     void inorder(Employee* root);
     void preorder(Employee* root);
     void postorder(Employee* root);
+    void swapChildren(Employee* root);
 
     int height(Employee* root);
     int countEmployees(Employee* root);

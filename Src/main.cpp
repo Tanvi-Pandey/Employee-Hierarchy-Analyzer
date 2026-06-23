@@ -25,6 +25,14 @@ int main() {
     std::cout << "Inorder: ";
     tree.inorder(ceo);
 
+    std::cout << "\nOriginal Preorder: ";
+    tree.preorder(ceo);
+
+    tree.swapChildren(ceo);
+
+    std::cout << "\nAfter Restructuring: ";
+    tree.preorder(ceo);
+
     std::cout << "\nPreorder: ";
     tree.preorder(ceo);
 

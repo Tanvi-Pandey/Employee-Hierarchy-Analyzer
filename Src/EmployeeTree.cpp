@@ -246,3 +246,14 @@ bool EmployeeTree::isBST(Employee* root) {
                      '\0',
                      '~');
 }
+
+void EmployeeTree::swapChildren(Employee* root) {
+
+    if (root == nullptr)
+        return;
+
+    std::swap(root->left, root->right);
+
+    swapChildren(root->left);
+    swapChildren(root->right);
+}
