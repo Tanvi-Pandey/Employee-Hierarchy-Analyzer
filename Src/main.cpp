@@ -13,6 +13,11 @@ int main() {
     Employee* ceo =
         tree.buildHierarchy(records);
 
+    if (ceo == nullptr) {
+        std::cout << "Failed to build hierarchy\n";
+        return 1;
+    }
+
     std::cout << "CEO: "
               << ceo->id
               << "\n\n";
@@ -46,9 +51,21 @@ int main() {
         tree.search(ceo, target);
 
     if (found != nullptr)
-        std::cout << target << " found in hierarchy\n";
+        std::cout << target
+                  << " found in hierarchy\n";
     else
-        std::cout << target << " not found\n";
+        std::cout << target
+                  << " not found\n";
+
+    char teammate =
+        tree.getTeammate(ceo, target);
+
+    if (teammate != 'X')
+        std::cout << "Teammate: "
+                  << teammate
+                  << '\n';
+    else
+        std::cout << "No teammate found\n";
 
     return 0;
 }

@@ -38,10 +38,10 @@ int EmployeeTree::height(Employee* root) {
     if (root == nullptr)
         return 0;
 
-    int leftHeight = height(root->left);
-    int rightHeight = height(root->right);
-
-    return 1 + std::max(leftHeight, rightHeight);
+    return 1 + std::max(
+        height(root->left),
+        height(root->right)
+    );
 }
 
 int EmployeeTree::countEmployees(Employee* root) {
@@ -59,7 +59,8 @@ int EmployeeTree::countManagers(Employee* root) {
 
     int current = 0;
 
-    if (root->left != nullptr || root->right != nullptr)
+    if (root->left != nullptr ||
+        root->right != nullptr)
         current = 1;
 
     return current +
@@ -67,7 +68,8 @@ int EmployeeTree::countManagers(Employee* root) {
            countManagers(root->right);
 }
 
-std::vector<Record> EmployeeTree::readRecords(const std::string& filename) {
+std::vector<Record> EmployeeTree::readRecords(
+    const std::string& filename) {
 
     std::ifstream file(filename);
 
@@ -92,38 +94,53 @@ std::vector<Record> EmployeeTree::readRecords(const std::string& filename) {
 
     file.close();
 
-    return records;}
+    return records;
+}
 
-    Employee* EmployeeTree::buildHierarchy(const std::vector<Record>& records) {
+Employee* EmployeeTree::buildHierarchy(
+    const std::vector<Record>& records) {
 
     std::unordered_map<char, Employee*> employees;
     std::unordered_set<char> children;
 
     for (const auto& record : records) {
 
-        if (employees.find(record.manager) == employees.end())
-            employees[record.manager] = new Employee(record.manager);
+        if (employees.find(record.manager)
+            == employees.end()) {
 
-        Employee* manager = employees[record.manager];
+            employees[record.manager] =
+                new Employee(record.manager);
+        }
+
+        Employee* manager =
+            employees[record.manager];
 
         if (record.leftEmployee != 'X') {
 
-            if (employees.find(record.leftEmployee) == employees.end())
+            if (employees.find(record.leftEmployee)
+                == employees.end()) {
+
                 employees[record.leftEmployee] =
                     new Employee(record.leftEmployee);
+            }
 
-            manager->left = employees[record.leftEmployee];
+            manager->left =
+                employees[record.leftEmployee];
 
             children.insert(record.leftEmployee);
         }
 
         if (record.rightEmployee != 'X') {
 
-            if (employees.find(record.rightEmployee) == employees.end())
+            if (employees.find(record.rightEmployee)
+                == employees.end()) {
+
                 employees[record.rightEmployee] =
                     new Employee(record.rightEmployee);
+            }
 
-            manager->right = employees[record.rightEmployee];
+            manager->right =
+                employees[record.rightEmployee];
 
             children.insert(record.rightEmployee);
         }
@@ -131,15 +148,19 @@ std::vector<Record> EmployeeTree::readRecords(const std::string& filename) {
 
     for (const auto& pair : employees) {
 
-        if (children.find(pair.first) == children.end()) {
+        if (children.find(pair.first)
+            == children.end()) {
+
             return pair.second;
         }
     }
 
-     return nullptr;
+    return nullptr;
 }
 
-Employee* EmployeeTree::search(Employee* root, char employeeId) {
+Employee* EmployeeTree::search(
+    Employee* root,
+    char employeeId) {
 
     if (root == nullptr)
         return nullptr;
@@ -154,4 +175,49 @@ Employee* EmployeeTree::search(Employee* root, char employeeId) {
         return leftResult;
 
     return search(root->right, employeeId);
+}
+
+Employee* EmployeeTree::findParent(
+    Employee* root,
+    char employeeId) {
+
+    if (root == nullptr)
+        return nullptr;
+
+    if ((root->left &&
+         root->left->id == employeeId) ||
+        (root->right &&
+         root->right->id == employeeId))
+        return root;
+
+    Employee* leftParent =
+        findParent(root->left, employeeId);
+
+    if (leftParent != nullptr)
+        return leftParent;
+
+    return findParent(root->right, employeeId);
+}
+
+char EmployeeTree::getTeammate(
+    Employee* root,
+    char employeeId) {
+
+    Employee* parent =
+        findParent(root, employeeId);
+
+    if (parent == nullptr)
+        return 'X';
+
+    if (parent->left &&
+        parent->left->id == employeeId &&
+        parent->right)
+        return parent->right->id;
+
+    if (parent->right &&
+        parent->right->id == employeeId &&
+        parent->left)
+        return parent->left->id;
+
+    return 'X';
 }

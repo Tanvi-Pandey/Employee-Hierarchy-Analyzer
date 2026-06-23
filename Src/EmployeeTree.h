@@ -35,6 +35,10 @@ public:
     Employee* buildHierarchy(const std::vector<Record>& records);
 
     Employee* search(Employee* root, char employeeId);
+
+    Employee* findParent(Employee* root, char employeeId);
+
+    char getTeammate(Employee* root, char employeeId);
 };
 
 #endif
