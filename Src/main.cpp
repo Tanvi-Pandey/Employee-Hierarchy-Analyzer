@@ -37,5 +37,18 @@ int main() {
 
     std::cout << '\n';
 
+    char target;
+
+    std::cout << "\nEnter employee to search: ";
+    std::cin >> target;
+
+    Employee* found =
+        tree.search(ceo, target);
+
+    if (found != nullptr)
+        std::cout << target << " found in hierarchy\n";
+    else
+        std::cout << target << " not found\n";
+
     return 0;
 }

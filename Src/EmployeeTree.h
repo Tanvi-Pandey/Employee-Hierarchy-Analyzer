@@ -33,6 +33,8 @@ public:
     std::vector<Record> readRecords(const std::string& filename);
 
     Employee* buildHierarchy(const std::vector<Record>& records);
+
+    Employee* search(Employee* root, char employeeId);
 };
 
 #endif

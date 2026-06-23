@@ -136,5 +136,22 @@ std::vector<Record> EmployeeTree::readRecords(const std::string& filename) {
         }
     }
 
-    return nullptr;
+     return nullptr;
+}
+
+Employee* EmployeeTree::search(Employee* root, char employeeId) {
+
+    if (root == nullptr)
+        return nullptr;
+
+    if (root->id == employeeId)
+        return root;
+
+    Employee* leftResult =
+        search(root->left, employeeId);
+
+    if (leftResult != nullptr)
+        return leftResult;
+
+    return search(root->right, employeeId);
 }
