@@ -4,6 +4,8 @@
 #include <fstream>
 #include <vector>
 #include <algorithm>
+#include <unordered_map>
+#include <unordered_set>
 
 void EmployeeTree::inorder(Employee* root) {
     if (root == nullptr)
@@ -90,5 +92,49 @@ std::vector<Record> EmployeeTree::readRecords(const std::string& filename) {
 
     file.close();
 
-    return records;
+    return records;}
+
+    Employee* EmployeeTree::buildHierarchy(const std::vector<Record>& records) {
+
+    std::unordered_map<char, Employee*> employees;
+    std::unordered_set<char> children;
+
+    for (const auto& record : records) {
+
+        if (employees.find(record.manager) == employees.end())
+            employees[record.manager] = new Employee(record.manager);
+
+        Employee* manager = employees[record.manager];
+
+        if (record.leftEmployee != 'X') {
+
+            if (employees.find(record.leftEmployee) == employees.end())
+                employees[record.leftEmployee] =
+                    new Employee(record.leftEmployee);
+
+            manager->left = employees[record.leftEmployee];
+
+            children.insert(record.leftEmployee);
+        }
+
+        if (record.rightEmployee != 'X') {
+
+            if (employees.find(record.rightEmployee) == employees.end())
+                employees[record.rightEmployee] =
+                    new Employee(record.rightEmployee);
+
+            manager->right = employees[record.rightEmployee];
+
+            children.insert(record.rightEmployee);
+        }
+    }
+
+    for (const auto& pair : employees) {
+
+        if (children.find(pair.first) == children.end()) {
+            return pair.second;
+        }
+    }
+
+    return nullptr;
 }

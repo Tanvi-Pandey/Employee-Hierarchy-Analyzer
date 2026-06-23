@@ -27,10 +27,12 @@ public:
     void postorder(Employee* root);
 
     int height(Employee* root);
-    int countManagers(Employee* root);
     int countEmployees(Employee* root);
+    int countManagers(Employee* root);
 
     std::vector<Record> readRecords(const std::string& filename);
+
+    Employee* buildHierarchy(const std::vector<Record>& records);
 };
 
 #endif
